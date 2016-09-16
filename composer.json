@@ -1,0 +1,23 @@
+{
+    "name": "um-flint/html",
+    "description": "A Laravel Form library.",
+    "require": {
+        "illuminate/support": "5.1.* || 5.2.* || 5.3.*",
+        "illuminate/view": "5.1.* || 5.2.* || 5.3.*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^5.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "UMFlint\\": "src/"
+        }
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Donald Wilcox",
+            "email": "dowilcox@umflint.edu"
+        }
+    ]
+}
