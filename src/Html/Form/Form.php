@@ -96,7 +96,7 @@ class Form
         }else {
             $this->values = (array)$data;
         }
-        
+
         return $this;
     }
 
@@ -174,6 +174,11 @@ class Form
 
         // Add each attribute to the lement.
         foreach ($this->getAttributes()->toArray() as $attriubte => $value) {
+            if ($attriubte == 'method') {
+                if (strtolower($value) !== 'get') {
+                    $value = 'POST';
+                }
+            }
             $form .= " {$attriubte}=\"{$value}\"";
         }
 
