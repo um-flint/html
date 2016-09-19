@@ -3,19 +3,24 @@
 namespace UMFlint\Html\Form;
 
 use Illuminate\Contracts\Support\Arrayable;
+use UMFlint\Html\Element;
 use UMFlint\Html\Form\Input\Hidden;
-use UMFlint\Html\Traits\HasAttributes;
 
-class Form
+class Form extends Element
 {
-    use HasAttributes;
-
     /**
      * Form config.
      *
      * @var array
      */
     protected $config = [];
+
+    /**
+     * Default method.
+     *
+     * @var string
+     */
+    protected $method = 'GET';
 
     /**
      * Input values.
@@ -50,8 +55,46 @@ class Form
      */
     public function __construct(array $config)
     {
+        parent::__construct('form');
         $this->config = $config;
         $this->initAttributes();
+    }
+
+    /**
+     * Set the method of the form.
+     *
+     * @author Donald Wilcox <dowilcox@umflint.edu>
+     * @param $method
+     * @return $this
+     * @throws \Exception
+     */
+    public function method($method)
+    {
+        $method = strtoupper($method);
+        $allowedMethods = [
+            'GET',
+            'HEAD',
+            'POST',
+            'PUT',
+            'DELETE',
+            'TRACE',
+            'OPTIONS',
+            'CONNECT',
+            'PATCH',
+        ];
+
+        if (!in_array($method, $allowedMethods)) {
+            throw new \Exception('Invalid method');
+        }
+
+        $this->method = $method;
+        if ($this->method !== 'GET') {
+            $this->set('method', 'POST');
+        }else {
+            $this->set('method', $this->method);
+        }
+
+        return $this;
     }
 
     /**
@@ -62,9 +105,13 @@ class Form
      * @param $method
      * @return $this
      */
-    public function open($url, $method)
+    public function open($url, $method = null)
     {
-        $this->set('action', $url)->set('method', $method)->set('class', $this->config[$this->config['framework']]['form']['class']);
+        $this->set('action', $url)->addClass($this->config[$this->config['framework']]['form']['class']);
+
+        if (!is_null($method)) {
+            $this->method($method);
+        }
 
         return $this;
     }
@@ -170,29 +217,12 @@ class Form
      */
     public function __toString()
     {
-        $form = "<form";
-
-        // Add each attribute to the lement.
-        foreach ($this->getAttributes()->toArray() as $attriubte => $value) {
-            if ($attriubte == 'method') {
-                if (strtolower($value) !== 'get') {
-                    $value = 'POST';
-                }
-            }
-            $form .= " {$attriubte}=\"{$value}\"";
-        }
-
-        $form .= ">";
-
-        $method = (new Hidden('_method', $this->get('method')))->render();
-
-        $form .= $method;
+        $this->appendChild((new Hidden('_method', $this->get('method')))->render());
 
         if (function_exists('csrf_token')) {
-            $token = (new Hidden('_token', csrf_token()))->render();
-            $form .= $token;
+            $this->appendChild((new Hidden('_token', csrf_token()))->render());
         }
-
-        return $form;
+        
+        return str_replace('</form>', '', $this->render());
     }
 }
