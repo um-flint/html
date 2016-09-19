@@ -162,6 +162,17 @@ class Form extends Element
     }
 
     /**
+     * Set validation errors.
+     *
+     * @author Donald Wilcox <dowilcox@umflint.edu>
+     * @param array $errors
+     */
+    public function setErrors(array $errors)
+    {
+        $this->errors = $errors;
+    }
+
+    /**
      * Render the end of the form.
      *
      * @author Donald Wilcox <dowilcox@umflint.edu>
