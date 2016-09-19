@@ -217,12 +217,12 @@ class Form extends Element
      */
     public function __toString()
     {
-        $this->appendChild((new Hidden('_method', $this->get('method')))->render());
+        $this->appendChild((new Hidden('_method', $this->method))->render());
 
         if (function_exists('csrf_token')) {
             $this->appendChild((new Hidden('_token', csrf_token()))->render());
         }
-        
+
         return str_replace('</form>', '', $this->render());
     }
 }
