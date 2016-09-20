@@ -9,5 +9,5 @@ class Checkbox extends Input
 {
     use Checkable, Inlineable;
 
-    protected $inputType = 'checkbox';
+    protected $type = 'checkbox';
 }

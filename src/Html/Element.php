@@ -10,11 +10,11 @@ class Element
     use HasAttributes;
 
     /**
-     * The type of element.
+     * The tag for this element..
      *
      * @var string
      */
-    protected $type;
+    protected $tag;
 
     /**
      * The children for this element.
@@ -50,11 +50,11 @@ class Element
     /**
      * Element constructor.
      *
-     * @param $type
+     * @param $tag
      */
-    public function __construct($type)
+    public function __construct($tag)
     {
-        $this->setType($type);
+        $this->setTag($tag);
 
         $this->initAttributes();
         $this->initChildren();
@@ -66,11 +66,11 @@ class Element
      * Set the type of element.
      *
      * @author Donald Wilcox <dowilcox@umflint.edu>
-     * @param $type
+     * @param $tag
      */
-    protected function setType($type)
+    protected function setTag($tag)
     {
-        $this->type = strtolower($type);
+        $this->tag = strtolower($tag);
     }
 
     /**
@@ -79,9 +79,9 @@ class Element
      * @author Donald Wilcox <dowilcox@umflint.edu>
      * @return mixed
      */
-    public function getType()
+    public function getTag()
     {
-        return $this->type;
+        return $this->tag;
     }
 
     /**
@@ -92,7 +92,7 @@ class Element
      */
     public function isVoid()
     {
-        return in_array($this->getType(), $this->void);
+        return in_array($this->getTag(), $this->void);
     }
 
     /**
@@ -245,7 +245,7 @@ class Element
      */
     public function render()
     {
-        $element = "<{$this->getType()}";
+        $element = "<{$this->getTag()}";
 
         // Add each attribute to the lement.
         foreach ($this->attributes->toArray() as $attriubte => $value) {
@@ -256,7 +256,7 @@ class Element
 
         // Check for void element.
         if (!$this->isVoid()) {
-            $element .= "{$this->renderChildren()}</{$this->getType()}>";
+            $element .= "{$this->renderChildren()}</{$this->getTag()}>";
         }
 
         return $element;

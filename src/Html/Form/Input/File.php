@@ -4,5 +4,5 @@ namespace UMFlint\Html\Form\Input;
 
 class File extends Input
 {
-    protected $inputType = 'file';
+    protected $type = 'file';
 }

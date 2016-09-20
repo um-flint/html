@@ -9,5 +9,5 @@ class Textarea extends Input
      *
      * @var string
      */
-    protected $type = 'textarea';
+    protected $tag = 'textarea';
 }

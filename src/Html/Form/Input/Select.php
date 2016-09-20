@@ -11,7 +11,7 @@ class Select extends Input
      *
      * @var string
      */
-    protected $type = 'select';
+    protected $tag = 'select';
 
     /**
      * The current selected option.

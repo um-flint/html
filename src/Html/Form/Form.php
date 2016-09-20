@@ -30,6 +30,13 @@ class Form extends Element
     protected $values = [];
 
     /**
+     * Old input values.
+     *
+     * @var array
+     */
+    protected $old = [];
+
+    /**
      * Input rules.
      *
      * @var array
@@ -52,11 +59,13 @@ class Form extends Element
      * Form constructor.
      *
      * @param array $config
+     * @param array $old
      */
-    public function __construct(array $config)
+    public function __construct(array $config, $old = [])
     {
         parent::__construct('form');
         $this->config = $config;
+        $this->old = $old;
         $this->initAttributes();
     }
 
@@ -142,6 +151,10 @@ class Form extends Element
             $this->values = $data->toArray();
         }else {
             $this->values = (array)$data;
+        }
+
+        if (!empty($this->old)) {
+            $this->values = $this->old;
         }
 
         return $this;
