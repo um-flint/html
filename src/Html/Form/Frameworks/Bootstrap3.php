@@ -61,7 +61,7 @@ class Bootstrap3 implements Framework
      */
     protected function isType($types)
     {
-        return in_array($this->input->getInputType(), (array)$types);
+        return in_array($this->input->getType(), (array)$types);
     }
 
     /**

@@ -126,7 +126,7 @@ class Input extends Element
      * @author Donald Wilcox <dowilcox@umflint.edu>
      * @return string
      */
-    public function getInputType()
+    public function getType()
     {
         return $this->type;
     }
