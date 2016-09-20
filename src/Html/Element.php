@@ -110,7 +110,7 @@ class Element
             $classes[] = $class;
         }
 
-        $this->set('class', implode(' ', $classes));
+        $this->set('class', trim(implode(' ', $classes), ' '));
 
         return $this;
     }
@@ -130,7 +130,7 @@ class Element
             unset($classes[$key]);
         }
 
-        $this->set('class', implode(' ', $classes));
+        $this->set('class', trim(implode(' ', $classes), ' '));
 
         return $this;
     }
