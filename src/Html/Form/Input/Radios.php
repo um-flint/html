@@ -13,11 +13,11 @@ class Radios extends Input implements Groupable
     }
 
     /**
-     * The default element type.
+     * The default element tag.
      *
      * @var string
      */
-    protected $type = 'div';
+    protected $tag = 'div';
 
     /**
      * @var string
