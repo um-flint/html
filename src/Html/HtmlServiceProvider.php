@@ -3,6 +3,7 @@
 namespace UMFlint\Html;
 
 use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\Request;
 use Illuminate\Support\ServiceProvider;
 use UMFlint\Html\Form\Form;
 
@@ -20,10 +21,10 @@ class HtmlServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__ . '/../config/html.php', 'html');
 
         $this->app->singleton('umflint.html.form', function ($app) {
-            $view = $app->make(Factory::class);
             $config = $app['config']['html'];
+            $request = $app->make(Request::class);
 
-            return new Form($config, $view);
+            return new Form($config, $request->old());
         });
 
         $this->app->alias('umflint.html.form', Form::class);
