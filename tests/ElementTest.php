@@ -8,7 +8,7 @@ class ElementTest extends \PHPUnit\Framework\TestCase
     {
         $div = new Element('div');
 
-        $this->assertEquals('div', $div->getType());
+        $this->assertEquals('div', $div->getTag());
     }
 
     public function testRender()
