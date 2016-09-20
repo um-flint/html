@@ -20,18 +20,18 @@ class Input extends Element
     const FRAMEWORK = Bootstrap3::class;
 
     /**
-     * The default element type.
+     * The default element tag.
      *
      * @var string
      */
-    protected $type = 'input';
+    protected $tag = 'input';
 
     /**
      * The type of input.
      *
      * @var string
      */
-    protected $inputType = null;
+    protected $type = null;
 
     /**
      * The label.
@@ -94,8 +94,8 @@ class Input extends Element
      */
     protected function setup($name, $value, $framework = null)
     {
-        if (!is_null($this->inputType)) {
-            $this->set('type', $this->inputType);
+        if (!is_null($this->type)) {
+            $this->set('type', $this->type);
         }
 
         $this->name($name);
@@ -128,7 +128,7 @@ class Input extends Element
      */
     public function getInputType()
     {
-        return $this->inputType;
+        return $this->type;
     }
 
     /**

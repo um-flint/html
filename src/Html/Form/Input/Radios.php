@@ -22,7 +22,7 @@ class Radios extends Input implements Groupable
     /**
      * @var string
      */
-    protected $inputType = 'radios';
+    protected $type = 'radios';
 
     /**
      * Wrapper for items().

@@ -13,16 +13,16 @@ class Checkboxes extends Input implements Groupable
     }
 
     /**
-     * The default element type.
+     * The default element tag.
      *
      * @var string
      */
-    protected $type = 'div';
+    protected $tag = 'div';
 
     /**
      * @var string
      */
-    protected $inputType = 'checkboxes';
+    protected $type = 'checkboxes';
 
     /**
      * Wrapper for items().

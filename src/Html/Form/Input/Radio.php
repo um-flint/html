@@ -9,5 +9,5 @@ class Radio extends Input
 {
     use Checkable, Inlineable;
 
-    protected $inputType = 'radio';
+    protected $type = 'radio';
 }

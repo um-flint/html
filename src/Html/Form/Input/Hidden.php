@@ -4,7 +4,7 @@ namespace UMFlint\Html\Form\Input;
 
 class Hidden extends Input
 {
-    protected $inputType = 'hidden';
+    protected $type = 'hidden';
 
     /**
      * Hidden input does not have a label.

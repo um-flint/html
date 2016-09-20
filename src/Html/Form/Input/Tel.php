@@ -4,5 +4,5 @@ namespace UMFlint\Html\Form\Input;
 
 class Tel extends Input
 {
-    protected $inputType = 'tel';
+    protected $type = 'tel';
 }

@@ -4,5 +4,5 @@ namespace UMFlint\Html\Form\Input;
 
 class Range extends Input
 {
-    protected $inputType = 'range';
+    protected $type = 'range';
 }
