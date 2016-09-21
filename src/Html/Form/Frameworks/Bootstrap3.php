@@ -142,7 +142,7 @@ class Bootstrap3 implements Framework
             $this->input->addClass($this->config['input']['class']);
         }
 
-        return $this->input->render();
+        return $this->input->renderElement();
     }
 
     /**

@@ -365,12 +365,23 @@ class Input extends Element
     }
 
     /**
-     * Render input.
+     * Render the element.
      *
      * @author Donald Wilcox <dowilcox@umflint.edu>
-     * @return mixed
+     * @return string
      */
-    public function __toString()
+    public function renderElement()
+    {
+        return parent::render();
+    }
+
+    /**
+     * Render the complete input with the framework.
+     *
+     * @author Donald Wilcox <dowilcox@umflint.edu>
+     * @return string
+     */
+    public function render()
     {
         return $this->framework->render();
     }
