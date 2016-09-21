@@ -153,7 +153,7 @@ class Bootstrap3 implements Framework
      */
     protected function createCheckboxOrRadio()
     {
-        $class = $this->input->getInputType();
+        $class = $this->input->getType();
 
         if ($this->input->isInline()) {
             $wrapper = $this->createLabel()
