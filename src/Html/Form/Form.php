@@ -59,13 +59,11 @@ class Form extends Element
      * Form constructor.
      *
      * @param array $config
-     * @param array $old
      */
-    public function __construct(array $config, $old = [])
+    public function __construct(array $config)
     {
         parent::__construct('form');
         $this->config = $config;
-        $this->old = $old;
         $this->initAttributes();
     }
 
@@ -136,6 +134,17 @@ class Form extends Element
         $this->set('enctype', 'multipart/form-data');
 
         return $this;
+    }
+
+    /**
+     * Set old input values.
+     *
+     * @author Donald Wilcox <dowilcox@umflint.edu>
+     * @param array $values
+     */
+    public function old(array $values)
+    {
+        $this->old = $values;
     }
 
     /**

@@ -3,7 +3,8 @@
     "description": "A Laravel Form library.",
     "require": {
         "illuminate/support": "5.1.* || 5.2.* || 5.3.*",
-        "illuminate/http": "5.1.* || 5.2.* || 5.3.*"
+        "illuminate/http": "5.1.* || 5.2.* || 5.3.*",
+        "illuminate/session": "5.1.* || 5.2.* || 5.3.*"
     },
     "require-dev": {
         "phpunit/phpunit": "^5.5"
