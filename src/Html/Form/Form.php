@@ -194,6 +194,11 @@ class Form extends Element
         $this->errors = $errors;
     }
 
+    public function actions($children)
+    {
+        return new Actions($children);
+    }
+
     /**
      * Render the end of the form.
      *
