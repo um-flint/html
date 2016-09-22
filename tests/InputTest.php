@@ -16,25 +16,31 @@ class InputTest extends \PHPUnit\Framework\TestCase
             'msg' => 'This is an error. It is for testing.',
         ];
 
-        // For help testing.
-        $help = [
-            'msg' => 'Help me.',
-        ];
-
         // General.
         $input = new Input('name');
         $this->assertEquals(null, $input->getType());
         $this->assertEquals('name', $input->get('name'));
         $this->assertEquals('name', $input->getId());
         $this->assertEquals('Name', $input->getLabel());
-        $this->assertEquals(true, $input->showLabel()); // false too
+        $this->assertEquals(true, $input->showLabel());
+
+        // Set showLabel to false.
+        $input->showLabel(false);
+        $this->assertEquals(false, $input->showLabel());
+        // Set it back to true for testing.
+        $input->showLabel(true);
+
         $input->value('notInput');
         $this->assertEquals('notInput', $input->get('value'));
         $this->assertEquals('<div class="form-group"><label for="name" class="control-label col-sm-3 col-md-3 col-lg-3">Name</label><div class="col-xs-12 col-sm-9 col-md-9 col-lg-9"><input name="name" id="name" value="notInput" class="form-control"></div></div>', $input->render());
 
         // Test auto labeling.
-        $testAutoLabel = new Input('hello.this.is.a.test'); // users[]
+        // Dot notation.
+        $testAutoLabel = new Input('hello.this.is.a.test');
         $this->assertEquals('<div class="form-group"><label for="hello[this][is][a][test]" class="control-label col-sm-3 col-md-3 col-lg-3">Hello This Is A Test</label><div class="col-xs-12 col-sm-9 col-md-9 col-lg-9"><input name="hello[this][is][a][test]" id="hello[this][is][a][test]" class="form-control"></div></div>', $testAutoLabel->render());
+        // Bracket notation.
+        $testAutoLabel = new Input('users[]');
+        $this->assertEquals('<div class="form-group"><label for="users[]" class="control-label col-sm-3 col-md-3 col-lg-3">Users</label><div class="col-xs-12 col-sm-9 col-md-9 col-lg-9"><input name="users[]" id="users[]" class="form-control"></div></div>', $testAutoLabel->render());
 
         // Error testing.
         $this->assertEquals(false, $input->hasErrors());
@@ -44,11 +50,16 @@ class InputTest extends \PHPUnit\Framework\TestCase
 
         // Help testing.
         $this->assertEquals(false, $input->hasHelp());
-        $input->help($help);
-        $this->assertEquals('Help me.', $input->getHelp()['msg']);
+        $input->help('Help me.');
+        $this->assertEquals('Help me.', $input->getHelp());
         $this->assertEquals(true, $input->hasHelp());
 
-        $this->assertEquals(false, $input->isRequired()); // true too.
+        // Required testing.
+        $this->assertEquals(false, $input->isRequired());
+
+        // Test setting required to true too.
+        $input->set('required', 'required');
+        $this->assertEquals(true, $input->isRequired());
     }
 
     /**
