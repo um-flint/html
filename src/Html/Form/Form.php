@@ -194,6 +194,26 @@ class Form extends Element
         $this->errors = $errors;
     }
 
+    /**
+     * Wrapper for button.
+     *
+     * @author Donald Wilcox <dowilcox@umflint.edu>
+     * @param        $text
+     * @param string $type
+     * @return Button
+     */
+    public function button($text, $type = 'submit')
+    {
+        return new Button($text, $type);
+    }
+
+    /**
+     * Wrapper for actions.
+     *
+     * @author Donald Wilcox <dowilcox@umflint.edu>
+     * @param $children
+     * @return Actions
+     */
     public function actions($children)
     {
         return new Actions($children);
