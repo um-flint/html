@@ -6,18 +6,11 @@ use UMFlint\Html\Element;
 use UMFlint\Html\Form\Frameworks\Bootstrap3;
 use UMFlint\Html\Form\Frameworks\Framework;
 use UMFlint\Html\Form\RuleParser;
+use UMFlint\Html\Traits\HasFramework;
 
 class Input extends Element
 {
-    /**
-     * @var Framework
-     */
-    protected $framework;
-
-    /**
-     * Default framework class.
-     */
-    const FRAMEWORK = Bootstrap3::class;
+    use HasFramework;
 
     /**
      * The default element tag.
@@ -109,13 +102,10 @@ class Input extends Element
         }
 
         if (is_null($framework)) {
-            $framework = self::FRAMEWORK;
+            $framework = self::$FRAMEWORK;
         }
 
-        $this->framework = new $framework($this);
-        if (!$this->framework instanceof Framework) {
-            throw new \Exception('Framework must be an instance of ' . Framework::class);
-        }
+        $this->setupFramework($framework);
 
         $this->ruleParser = new RuleParser($this);
     }
@@ -383,6 +373,6 @@ class Input extends Element
      */
     public function render()
     {
-        return $this->framework->render();
+        return $this->framework->render($this);
     }
 }
