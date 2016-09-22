@@ -106,6 +106,10 @@ class Bootstrap3 implements Framework
      */
     public function createHelp()
     {
+        if (!$this->input->hasHelp()) {
+            return '';
+        }
+
         return (new Element('span'))
             ->set('class', 'help-block')
             ->appendChild($this->input->getHelp());
@@ -119,6 +123,10 @@ class Bootstrap3 implements Framework
      */
     public function createErrors()
     {
+        if (!$this->input->hasErrors()) {
+            return '';
+        }
+
         $list = (new Element('ul'))->set('class', 'help-block');
 
         foreach ($this->input->getErrors() as $error) {
@@ -171,13 +179,8 @@ class Bootstrap3 implements Framework
             $wrapper->addClass('has-error');
         }
 
-        if ($this->input->hasHelp()) {
-            $wrapper->appendChild($this->createHelp());
-        }
-
-        if ($this->input->hasErrors()) {
-            $wrapper->appendChild($this->createErrors());
-        }
+        $wrapper->appendChild($this->createHelp());
+        $wrapper->appendChild($this->createErrors());
 
         return $wrapper->render();
     }
@@ -244,16 +247,13 @@ class Bootstrap3 implements Framework
                 }
             }
 
-            $grid->appendChild($this->createinput());
-
-            if ($this->input->hasHelp()) {
-                $grid->appendChild($this->createHelp());
-            }
-
             if ($this->input->hasErrors()) {
                 $wrapper->addClass('has-error');
-                $grid->appendChild($this->createErrors());
             }
+
+            $grid->appendChild($this->createinput());
+            $grid->appendChild($this->createHelp());
+            $grid->appendChild($this->createErrors());
 
             return $wrapper->appendChild($grid)->render();
         }elseif (is_null($this->config['form']['class']) || $this->config['form']['class'] == 'form-inline') {
@@ -264,16 +264,13 @@ class Bootstrap3 implements Framework
                 $wrapper->appendChild($this->createLabel());
             }
 
-            if ($this->input->hasHelp()) {
-                $wrapper->appendChild($this->createHelp());
-            }
-
             if ($this->input->hasErrors()) {
                 $wrapper->addClass('has-error');
-                $wrapper->appendChild($this->createErrors());
             }
 
             $wrapper->appendChild($this->createinput());
+            $wrapper->appendChild($this->createHelp());
+            $wrapper->appendChild($this->createErrors());
 
             return $wrapper->render();
         }else {
@@ -282,14 +279,8 @@ class Bootstrap3 implements Framework
             }
 
             $input = $this->createinput();
-
-            if ($this->input->hasHelp()) {
-                $input .= $this->renderHelp();
-            }
-
-            if ($this->input->hasErrors()) {
-                $input .= $this->renderErrors();
-            }
+            $input .= $this->renderHelp();
+            $input .= $this->renderErrors();
 
             return $input;
         }
