@@ -2,6 +2,9 @@
 
 namespace UMFlint\Html\Form\Frameworks;
 
+use UMFlint\Html\Form\Actions;
+use UMFlint\Html\Form\Input\Input;
+
 interface Framework
 {
     /**
@@ -32,7 +35,17 @@ interface Framework
      * Render the entire input.
      *
      * @author Donald Wilcox <dowilcox@umflint.edu>
+     * @param Input $input
      * @return string
      */
-    public function render();
+    public function render(Input $input);
+
+    /**
+     * Render actions.
+     *
+     * @author Donald Wilcox <dowilcox@umflint.edu>
+     * @param Actions $actions
+     * @return mixed
+     */
+    public function renderActions(Actions $actions);
 }

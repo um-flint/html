@@ -3,6 +3,7 @@
 namespace UMFlint\Html\Form\Frameworks;
 
 use UMFlint\Html\Element;
+use UMFlint\Html\Form\Actions;
 use UMFlint\Html\Form\Input\Input;
 
 class Bootstrap3 implements Framework
@@ -41,13 +42,9 @@ class Bootstrap3 implements Framework
 
     /**
      * Bootstrap3 constructor.
-     *
-     * @param Input $input
      */
-    public function __construct(Input $input)
+    public function __construct()
     {
-        $this->input = $input;
-
         if (function_exists('config')) {
             $this->config = config('html.' . Bootstrap3::class);
         }
@@ -106,6 +103,10 @@ class Bootstrap3 implements Framework
      */
     public function createHelp()
     {
+        if (!$this->input->hasHelp()) {
+            return '';
+        }
+
         return (new Element('span'))
             ->set('class', 'help-block')
             ->appendChild($this->input->getHelp());
@@ -119,6 +120,10 @@ class Bootstrap3 implements Framework
      */
     public function createErrors()
     {
+        if (!$this->input->hasErrors()) {
+            return '';
+        }
+
         $list = (new Element('ul'))->set('class', 'help-block');
 
         foreach ($this->input->getErrors() as $error) {
@@ -171,13 +176,8 @@ class Bootstrap3 implements Framework
             $wrapper->addClass('has-error');
         }
 
-        if ($this->input->hasHelp()) {
-            $wrapper->appendChild($this->createHelp());
-        }
-
-        if ($this->input->hasErrors()) {
-            $wrapper->appendChild($this->createErrors());
-        }
+        $wrapper->appendChild($this->createHelp());
+        $wrapper->appendChild($this->createErrors());
 
         return $wrapper->render();
     }
@@ -186,10 +186,13 @@ class Bootstrap3 implements Framework
      * Render the input group.
      *
      * @author Donald Wilcox <dowilcox@umflint.edu>
+     * @param Input $input
      * @return string
      */
-    public function render()
+    public function render(Input $input)
     {
+        $this->input = $input;
+
         if ($this->isType('hidden')) {
             return $this->createInput();
         }
@@ -244,16 +247,13 @@ class Bootstrap3 implements Framework
                 }
             }
 
-            $grid->appendChild($this->createinput());
-
-            if ($this->input->hasHelp()) {
-                $grid->appendChild($this->createHelp());
-            }
-
             if ($this->input->hasErrors()) {
                 $wrapper->addClass('has-error');
-                $grid->appendChild($this->createErrors());
             }
+
+            $grid->appendChild($this->createinput());
+            $grid->appendChild($this->createHelp());
+            $grid->appendChild($this->createErrors());
 
             return $wrapper->appendChild($grid)->render();
         }elseif (is_null($this->config['form']['class']) || $this->config['form']['class'] == 'form-inline') {
@@ -264,16 +264,13 @@ class Bootstrap3 implements Framework
                 $wrapper->appendChild($this->createLabel());
             }
 
-            if ($this->input->hasHelp()) {
-                $wrapper->appendChild($this->createHelp());
-            }
-
             if ($this->input->hasErrors()) {
                 $wrapper->addClass('has-error');
-                $wrapper->appendChild($this->createErrors());
             }
 
             $wrapper->appendChild($this->createinput());
+            $wrapper->appendChild($this->createHelp());
+            $wrapper->appendChild($this->createErrors());
 
             return $wrapper->render();
         }else {
@@ -282,16 +279,51 @@ class Bootstrap3 implements Framework
             }
 
             $input = $this->createinput();
-
-            if ($this->input->hasHelp()) {
-                $input .= $this->renderHelp();
-            }
-
-            if ($this->input->hasErrors()) {
-                $input .= $this->renderErrors();
-            }
+            $input .= $this->renderHelp();
+            $input .= $this->renderErrors();
 
             return $input;
+        }
+    }
+
+    /**
+     * Render actions.
+     *
+     * @author Donald Wilcox <dowilcox@umflint.edu>
+     * @param Actions $actions
+     * @return string
+     */
+    public function renderActions(Actions $actions)
+    {
+        if ($this->config['form']['class'] == 'form-horizontal') {
+            $actions->addClass('form-group');
+
+            $grid = (new Element('div'));
+            foreach ($this->config['input']['columns'] as $breakpoint => $width) {
+                if (!is_null($width)) {
+                    $grid->addClass("col-{$breakpoint}-{$width}");
+                }
+            }
+
+            foreach ($this->config['label']['columns'] as $breakpoint => $width) {
+                if (!is_null($width)) {
+                    $grid->addClass("col-{$breakpoint}-offset-{$width}");
+                }
+            }
+
+            $children = $actions->getChildren();
+            $actions->emptyChildren();
+            foreach ($children as $child) {
+                $grid->appendChild($child);
+            }
+            
+            return $actions->appendChild($grid)->renderElement();
+        }elseif (is_null($this->config['form']['class']) || $this->config['form']['class'] == 'form-inline') {
+            $actions->addClass('form-group');
+
+            return $actions->renderElement();
+        }else {
+            return $actions->renderElement();
         }
     }
 }
