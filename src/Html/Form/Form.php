@@ -216,7 +216,7 @@ class Form extends Element
      */
     public function actions($children)
     {
-        return new Actions($children);
+        return new Actions($children, $this->config['framework']);
     }
 
     /**

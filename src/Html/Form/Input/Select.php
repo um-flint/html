@@ -69,7 +69,7 @@ class Select extends Input
     {
         foreach ($this->getChildren() as $child) {
             // Check if this is our value.
-            if ($child instanceof Input && in_array($child->get('value'), $this->value)) {
+            if ($child instanceof Element && in_array($child->get('value'), $this->value)) {
                 $child->set('selected', 'selected');
             }else {
                 $child->remove('selected');
