@@ -125,8 +125,9 @@ class Element
     public function removeClass($class)
     {
         $classes = explode(' ', $this->get('class'));
+        $key = array_search($class, $classes);
 
-        if ($key = array_search($class, $classes) !== false) {
+        if ($key !== false) {
             unset($classes[$key]);
         }
 
