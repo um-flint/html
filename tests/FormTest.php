@@ -47,7 +47,7 @@ class FormTest extends \PHPUnit\Framework\TestCase
         // Test setting an invalid method.
         try {
             $form->method('orbit');
-        }catch (Exception $e) {
+        }catch(Exception $e) {
             $this->assertEquals('Invalid method', $e->getMessage());
         }
     }
@@ -82,7 +82,7 @@ class FormTest extends \PHPUnit\Framework\TestCase
         $date = $form->date('date');
         $this->assertTrue($date instanceof \UMFlint\Html\Form\Input\Date);
 
-        $datetime = $form->dateTime('datetime');
+        $datetime = $form->datetime('datetime');
         $this->assertTrue($datetime instanceof \UMFlint\Html\Form\Input\Datetime);
 
         $email = $form->email('email');
