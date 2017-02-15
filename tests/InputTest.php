@@ -69,6 +69,11 @@ class InputTest extends \PHPUnit\Framework\TestCase
      */
     public function testInputRules()
     {
+        // Regex
+        $input = new Input('inputRules');
+        $input->rules('regex:/^.+\/+$/');
+        $this->assertEquals('^.+\/+$', $input->get('pattern'));
+
         // Accepted.
         $input = new Input('inputRules');
         $input->rules('accepted');

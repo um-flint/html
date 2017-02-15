@@ -52,6 +52,25 @@ class RuleParser
     }
 
     /**
+     * Check that a input matches pattern.
+     *
+     *  regex:pattern --> pattern="pattern"
+     *
+     * @param $param
+     * @return array
+     *
+     * @see https://laravel.com/docs/5.1/validation#rule-regex
+     */
+    protected function regex($param)
+    {
+        $regex = trim($param[0], '/');
+
+        return [
+            'pattern' => $regex,
+        ];
+    }
+
+    /**
      * Check that a checkbox is accepted. Needs yes, on, 1, or true as value.
      *
      *   accepted  -> required="required"
