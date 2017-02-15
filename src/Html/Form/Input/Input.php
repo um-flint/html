@@ -250,6 +250,20 @@ class Input extends Element
     }
 
     /**
+     * Set the placeholder for the input.
+     *
+     * @author Donald Wilcox <dowilcox@umflint.edu>
+     * @param $value
+     * @return $this
+     */
+    public function placeholder($value)
+    {
+        $this->set('placeholder', $value);
+
+        return $this;
+    }
+
+    /**
      * Apply validation rules.
      *
      * @author Donald Wilcox <dowilcox@umflint.edu>
