@@ -104,10 +104,13 @@ class Element
      */
     public function addClass($class)
     {
+        $newClasses = (array)$class;
         $classes = explode(' ', $this->get('class'));
 
-        if (!in_array($class, $classes)) {
-            $classes[] = $class;
+        foreach ($newClasses as $class) {
+            if (!in_array($class, $classes)) {
+                $classes[] = $class;
+            }
         }
 
         $this->set('class', trim(implode(' ', $classes), ' '));
@@ -124,11 +127,15 @@ class Element
      */
     public function removeClass($class)
     {
+        $removeClasses = (array)$class;
         $classes = explode(' ', $this->get('class'));
-        $key = array_search($class, $classes);
 
-        if ($key !== false) {
-            unset($classes[$key]);
+        foreach ($removeClasses as $class) {
+            $key = array_search($class, $classes);
+
+            if ($key !== false) {
+                unset($classes[$key]);
+            }
         }
 
         $this->set('class', trim(implode(' ', $classes), ' '));

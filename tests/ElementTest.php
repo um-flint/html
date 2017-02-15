@@ -45,8 +45,18 @@ class ElementTest extends \PHPUnit\Framework\TestCase
         preg_match('/class="(.*?)"/', $div->render(), $classes);
         $this->assertEquals('button', $classes[1]);
 
+        // Add Multiple.
+        $div->addClass(['foo', 'bar']);
+        preg_match('/class="(.*?)"/', $div->render(), $classes);
+        $this->assertEquals('button foo bar', $classes[1]);
+
         // Remove.
         $div->removeClass('button');
+        preg_match('/class="(.*?)"/', $div->render(), $classes);
+        $this->assertEquals('foo bar', $classes[1]);
+
+        // Remove Multiple
+        $div->removeClass(['foo', 'bar']);
         preg_match('/class="(.*?)"/', $div->render(), $classes);
         $this->assertEquals('', $classes[1]);
     }
