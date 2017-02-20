@@ -24,7 +24,7 @@ class Element
     protected $children;
 
     /**
-     * Self closing HTML5 elemnts.
+     * Self closing HTML5 elements.
      *
      * @see https://www.w3.org/TR/html5/syntax.html#void-elements
      * @var array
