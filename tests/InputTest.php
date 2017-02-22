@@ -412,11 +412,11 @@ class InputTest extends \PHPUnit\Framework\TestCase
 
         // Multiple select.
         $select->multiple();
-        $this->assertEquals('<div class="form-group"><label for="names" class="control-label col-sm-3 col-md-3 col-lg-3">Names</label><div class="col-xs-12 col-sm-9 col-md-9 col-lg-9"><select name="names" id="names" class="form-control" multiple="multiple"><option value="1" selected="selected">Tyler Elton</option><option value="2">Donald Wilcox</option><option value="3">John Doe</option></select></div></div>', $select->render());
+        $this->assertEquals('<div class="form-group"><label for="names[]" class="control-label col-sm-3 col-md-3 col-lg-3">Names</label><div class="col-xs-12 col-sm-9 col-md-9 col-lg-9"><select name="names[]" id="names[]" class="form-control" multiple="multiple"><option value="1" selected="selected">Tyler Elton</option><option value="2">Donald Wilcox</option><option value="3">John Doe</option></select></div></div>', $select->render());
 
         $select->value(1);
         $select->value(2);
-        $this->assertEquals('<div class="form-group"><label for="names" class="control-label col-sm-3 col-md-3 col-lg-3">Names</label><div class="col-xs-12 col-sm-9 col-md-9 col-lg-9"><select name="names" id="names" class="form-control" multiple="multiple"><option value="1">Tyler Elton</option><option value="2" selected="selected">Donald Wilcox</option><option value="3">John Doe</option></select></div></div>', $select->render());
+        $this->assertEquals('<div class="form-group"><label for="names[]" class="control-label col-sm-3 col-md-3 col-lg-3">Names</label><div class="col-xs-12 col-sm-9 col-md-9 col-lg-9"><select name="names[]" id="names[]" class="form-control" multiple="multiple"><option value="1">Tyler Elton</option><option value="2" selected="selected">Donald Wilcox</option><option value="3">John Doe</option></select></div></div>', $select->render());
     }
 
     public function testTel()
