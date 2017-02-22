@@ -43,7 +43,7 @@ Element:
 
 You can also append a child within another child:
 ```php
-$div->appendChild((new UMFlint\Html\Element('span')))->appendChild('I am inside a span');
+$div->appendChild((new UMFlint\Html\Element('span'))->appendChild('I am inside a span'));
 ```
 
 Output:
