@@ -143,7 +143,7 @@ class Input extends Element
         }
 
         $this->set('name', $name);
-        $this->set('id', $name);
+        $this->id($name);
 
         return $this;
     }
