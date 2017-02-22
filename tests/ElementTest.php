@@ -23,6 +23,10 @@ class ElementTest extends \PHPUnit\Framework\TestCase
         $div->appendChild('text');
 
         $this->assertEquals('<div>text</div>', $div->render());
+
+        // Append a child within a child.
+        $div->appendChild((new Element('span'))->appendChild('text inside span'));
+        $this->assertEquals('<div>text<span>text inside span</span></div>', $div->render());
     }
 
     public function testIsVoid()
