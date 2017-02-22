@@ -102,7 +102,7 @@ Output:
 <div>I am a child<span>I am inside a span</span></div>
 ```
 
-Prepending a child to an element:
+You can prepend a child to an element:
 ```php
 $div->prependChild('NEW ');
 ```
