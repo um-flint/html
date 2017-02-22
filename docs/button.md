@@ -1,7 +1,7 @@
-## Custom Buttons
+# Custom Buttons
 
+#### Rendering a button
 To set a custom button:
-
 ```php
 $button = new \UMFlint\Html\Form\Button('Submit!');
 $button->render();
@@ -15,9 +15,9 @@ Outputs:
 _The default `type` that is set is `submit`. If you do not specify a type, 
 it will automatically be set to `submit`_
 
-##### You can also set the `text` and `type` attributes:
+#### Text and Type Attributes
 
-Text:
+##### Text
 ```php
 $button = new \UMFlint\Html\Form\Button('Submit!');
 $button->text('Cancel');
@@ -28,7 +28,7 @@ Outputs:
 <button type="submit">Cancel</button>
 ```
 
-Type:
+##### Type
 ```php
 $button = new \UMFlint\Html\Form\Button('Submit!');
 $button->type('reset');
