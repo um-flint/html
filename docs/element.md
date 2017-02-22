@@ -51,7 +51,7 @@ Output:
 <div>I am a child<span>I am inside a span</span></div>
 ```
 
-Adding another class to an element:
+Adding a class to an element:
 ```php
 $div = new UMFlint\Html\Element('div');
 $div->addClass('input');
@@ -67,7 +67,7 @@ You can also add multiple classes as an array:
 $div->addClass(['submit', 'button']);
 ```
 
-The element looks like:
+The element now looks like:
 ```html
 <div class="input submit button"></div>
 ```
@@ -82,3 +82,22 @@ Now the element looks like:
 <div class="input submit"></div>
 ```
 
+Removing multiple classes at once:
+```php
+$div->removeClass(['input', 'submit']);
+```
+
+Output:
+```html
+<div></div>
+```
+
+You can also add an ID to the element:
+```php
+$div->id('myId');
+```
+
+Output:
+```html
+<div id="myId"></div>
+```
