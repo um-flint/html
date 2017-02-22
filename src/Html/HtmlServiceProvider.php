@@ -2,7 +2,6 @@
 
 namespace UMFlint\Html;
 
-use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
 use Illuminate\Session\SessionManager;
 use Illuminate\Support\ServiceProvider;
