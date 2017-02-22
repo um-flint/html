@@ -36,6 +36,13 @@ class ElementTest extends \PHPUnit\Framework\TestCase
         $this->assertNotEquals(1, $div->isVoid());
     }
 
+    public function testSettingId()
+    {
+        $div = new Element('div');
+        $div->id('testing');
+        $this->assertEquals('<div id="testing"></div>', $div->render());
+    }
+
     public function testAddRemoveClass()
     {
         $div = new Element('div');
