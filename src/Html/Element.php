@@ -96,6 +96,20 @@ class Element
     }
 
     /**
+     * Helper to set the ID of the element.
+     *
+     * @author Donald Wilcox <dowilcox@umflint.edu>
+     * @param $id
+     * @return $this
+     */
+    public function id($id)
+    {
+        $this->set('id', $id);
+
+        return $this;
+    }
+
+    /**
      * Adds the passed class to the class attribute if it does not already exist.
      *
      * @author Donald Wilcox <dowilcox@umflint.edu>
