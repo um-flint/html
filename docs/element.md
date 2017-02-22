@@ -1,4 +1,4 @@
-## Elements
+# Elements
 
 Rendering an element:
 ```php
@@ -28,27 +28,6 @@ $br->render();
 Output:
 ```html
 <br>
-```
-
-You can append text inside your element also:
-```php
-$div = new UMFlint\Html\Element('div');
-$div->appendChild('I am a child');
-```
-
-Element:
-```html
-<div>I am a child</div>
-```
-
-You can also append a child within another child:
-```php
-$div->appendChild((new UMFlint\Html\Element('span'))->appendChild('I am inside a span'));
-```
-
-Output:
-```html
-<div>I am a child<span>I am inside a span</span></div>
 ```
 
 Adding a class to an element:
@@ -100,4 +79,35 @@ $div->id('myId');
 Output:
 ```html
 <div id="myId"></div>
+```
+
+You can append text inside your element also:
+```php
+$div = new UMFlint\Html\Element('div');
+$div->appendChild('I am a child');
+```
+
+Element:
+```html
+<div>I am a child</div>
+```
+
+You can also append a child within another child:
+```php
+$div->appendChild((new UMFlint\Html\Element('span'))->appendChild('I am inside a span'));
+```
+
+Output:
+```html
+<div>I am a child<span>I am inside a span</span></div>
+```
+
+Prepending a child to an element:
+```php
+$div->prependChild('NEW ');
+```
+
+Element looks like:
+```html
+<div>NEW I am a child<span>I am inside a  span</span></div>
 ```
