@@ -41,6 +41,7 @@ class Select extends Input
     public function multiple()
     {
         $this->set('multiple', 'multiple');
+        $this->name("{$this->get('name')}[]");
 
         return $this;
     }
