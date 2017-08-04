@@ -9,13 +9,6 @@ use UMFlint\Html\Form\Input\Hidden;
 class Form extends Element
 {
     /**
-     * Form config.
-     *
-     * @var array
-     */
-    protected $config = [];
-
-    /**
      * Default method.
      *
      * @var string
@@ -44,26 +37,16 @@ class Form extends Element
     protected $rules = [];
 
     /**
-     * Input validation errors.
-     *
-     * @var array
-     */
-    protected $errors = [];
-
-    /**
      * Namespace for input classes.
      */
     const INPUT_NAMESPACE = '\UMFlint\Html\Form\Input\\';
 
     /**
      * Form constructor.
-     *
-     * @param array $config
      */
-    public function __construct(array $config)
+    public function __construct()
     {
         parent::__construct('form');
-        $this->config = $config;
         $this->initAttributes();
     }
 
@@ -114,7 +97,7 @@ class Form extends Element
      */
     public function open($url, $method = null)
     {
-        $this->set('action', $url)->addClass($this->config[$this->config['framework']]['form']['class']);
+        $this->set('action', $url);
 
         if (!is_null($method)) {
             $this->method($method);
@@ -184,17 +167,6 @@ class Form extends Element
     }
 
     /**
-     * Set validation errors.
-     *
-     * @author Donald Wilcox <dowilcox@umflint.edu>
-     * @param array $errors
-     */
-    public function setErrors(array $errors)
-    {
-        $this->errors = $errors;
-    }
-
-    /**
      * Wrapper for button.
      *
      * @author Donald Wilcox <dowilcox@umflint.edu>
@@ -207,9 +179,16 @@ class Form extends Element
         return new Button($text, $type);
     }
 
+    /**
+     * Wrapper for label.
+     *
+     * @author Donald Wilcox <dowilcox@umflint.edu>
+     * @param $text
+     * @return Label
+     */
     public function label($text)
     {
-
+        return new Label($text);
     }
 
     /**
@@ -243,17 +222,12 @@ class Form extends Element
             $value = array_get($this->values, $name, null);
 
             // Create input class.
-            $input = new $class($name, $value, $this->config['framework']);
+            $input = new $class($name, $value);
 
             // Set rules for input if we have any.
             $rules = array_get($this->rules, $name, null);
             if (!is_null($rules)) {
                 $input->rules($rules);
-            }
-
-            // Set errors for input if we have any.
-            if (isset($this->errors[$name])) {
-                $input->setErrors($this->errors[$name]);
             }
 
             return $input;
