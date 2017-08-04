@@ -4,25 +4,21 @@ namespace UMFlint\Html\Form;
 
 use UMFlint\Html\Element;
 
-class Button extends Element
+class Label extends Element
 {
     /**
-     * Button constructor.
+     * Label constructor.
      *
-     * @param        $text
-     * @param string $type
+     * @param $text
      */
-    public function __construct($text, $type = 'submit')
+    public function __construct($text)
     {
-        parent::__construct('button');
+        parent::__construct('label');
         $this->text($text);
-        $this->type($type);
-
-        return $this;
     }
 
     /**
-     * Set the text for button.
+     * Set the text for label.
      *
      * @author Donald Wilcox <dowilcox@umflint.edu>
      * @param $text
@@ -37,15 +33,15 @@ class Button extends Element
     }
 
     /**
-     * Set the type of button.
+     * Set what input this label is for.
      *
      * @author Donald Wilcox <dowilcox@umflint.edu>
-     * @param $type
+     * @param $id
      * @return $this
      */
-    public function type($type)
+    public function for ($id)
     {
-        $this->set('type', $type);
+        $this->set('for', $id);
 
         return $this;
     }

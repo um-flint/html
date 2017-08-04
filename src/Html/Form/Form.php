@@ -207,16 +207,9 @@ class Form extends Element
         return new Button($text, $type);
     }
 
-    /**
-     * Wrapper for actions.
-     *
-     * @author Donald Wilcox <dowilcox@umflint.edu>
-     * @param $children
-     * @return Actions
-     */
-    public function actions($children)
+    public function label($text)
     {
-        return new Actions($children, $this->config['framework']);
+
     }
 
     /**
