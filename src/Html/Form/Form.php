@@ -188,7 +188,11 @@ class Form extends Element
      */
     public function label($text)
     {
-        return new Label($text);
+        $label = new Label($text);
+
+        $label->addClass(config('html.label.class'));
+
+        return $label;
     }
 
     /**
@@ -223,6 +227,8 @@ class Form extends Element
 
             // Create input class.
             $input = new $class($name, $value);
+
+            $input->addClass(config('html.input.class'));
 
             // Set rules for input if we have any.
             $rules = array_get($this->rules, $name, null);
