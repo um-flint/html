@@ -228,7 +228,9 @@ class Form extends Element
             // Create input class.
             $input = new $class($name, $value);
 
-            $input->addClass(config('html.input.class'));
+            if ($input->getType() != 'checkbox' && $input->getType() != 'radio') {
+                $input->addClass(config('html.input.class'));
+            }
 
             // Set rules for input if we have any.
             $rules = array_get($this->rules, $name, null);
