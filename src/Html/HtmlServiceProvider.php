@@ -31,8 +31,9 @@ class HtmlServiceProvider extends ServiceProvider
 
         $this->app->singleton('umflint.html.form', function ($app) {
             $request = $app->make(Request::class);
+            $config = $app['config']['html'];
 
-            $form = new Form();
+            $form = new Form($config);
             $form->old($request->old());
 
             return $form;

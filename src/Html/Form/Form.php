@@ -9,6 +9,11 @@ use UMFlint\Html\Form\Input\Hidden;
 class Form extends Element
 {
     /**
+     * @var array
+     */
+    protected $config;
+
+    /**
      * Default method.
      *
      * @var string
@@ -43,11 +48,14 @@ class Form extends Element
 
     /**
      * Form constructor.
+     *
+     * @param array $config
      */
-    public function __construct()
+    public function __construct(array $config)
     {
         parent::__construct('form');
         $this->initAttributes();
+        $this->config = $config;
     }
 
     /**
@@ -190,7 +198,7 @@ class Form extends Element
     {
         $label = new Label($text);
 
-        $label->addClass(config('html.label.class'));
+        $label->addClass($this->config['label']['class']);
 
         return $label;
     }
@@ -229,7 +237,7 @@ class Form extends Element
             $input = new $class($name, $value);
 
             if ($input->getType() != 'checkbox' && $input->getType() != 'radio') {
-                $input->addClass(config('html.input.class'));
+                $input->addClass($this->config['input']['class']);
             }
 
             // Set rules for input if we have any.
