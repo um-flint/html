@@ -7,7 +7,7 @@ use UMFlint\Html\Traits\Inlineable;
 
 class Radio extends Input
 {
-    use Checkable, Inlineable;
+    use Checkable;
 
     protected $type = 'radio';
 }

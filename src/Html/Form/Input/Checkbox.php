@@ -7,7 +7,7 @@ use UMFlint\Html\Traits\Inlineable;
 
 class Checkbox extends Input
 {
-    use Checkable, Inlineable;
+    use Checkable;
 
     protected $type = 'checkbox';
 }
