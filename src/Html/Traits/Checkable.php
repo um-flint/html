@@ -8,11 +8,17 @@ trait Checkable
      * Helper to check an input.
      *
      * @author Donald Wilcox <dowilcox@umflint.edu>
+     * @param bool $check
      * @return $this
      */
-    public function check()
+    public function check($check = true)
     {
-        $this->set('checked', 'checked');
+        if ($check) {
+            $this->set('checked', 'checked');
+        }else {
+            $this->uncheck();
+        }
+
 
         return $this;
     }
