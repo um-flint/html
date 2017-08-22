@@ -6,28 +6,26 @@ class FormTest extends \PHPUnit\Framework\TestCase
 {
     // Config for Form.
     protected $config = [
-        'framework'                                     => \UMFlint\Html\Form\Frameworks\Bootstrap3::class,
-        \UMFlint\Html\Form\Frameworks\Bootstrap3::class => [
-            'form'  => [
-                'class' => 'form-horizontal', // form-horizontal || form-inline || null
+        'framework' => \UMFlint\Html\Form\Frameworks\Bootstrap3::class,
+        'form'      => [
+            'class' => 'form-horizontal', // form-horizontal || form-inline || null
+        ],
+        'label'     => [
+            'class'   => 'control-label',
+            'columns' => [
+                'xs' => null,
+                'sm' => 3,
+                'md' => 3,
+                'lg' => 3,
             ],
-            'label' => [
-                'class'   => 'control-label',
-                'columns' => [
-                    'xs' => null,
-                    'sm' => 3,
-                    'md' => 3,
-                    'lg' => 3,
-                ],
-            ],
-            'input' => [
-                'class'   => 'form-control',
-                'columns' => [
-                    'xs' => 12,
-                    'sm' => 9,
-                    'md' => 9,
-                    'lg' => 9,
-                ],
+        ],
+        'input'     => [
+            'class'   => 'form-control',
+            'columns' => [
+                'xs' => 12,
+                'sm' => 9,
+                'md' => 9,
+                'lg' => 9,
             ],
         ],
     ];
@@ -47,7 +45,7 @@ class FormTest extends \PHPUnit\Framework\TestCase
         // Test setting an invalid method.
         try {
             $form->method('orbit');
-        }catch(Exception $e) {
+        }catch (Exception $e) {
             $this->assertEquals('Invalid method', $e->getMessage());
         }
     }
@@ -72,9 +70,6 @@ class FormTest extends \PHPUnit\Framework\TestCase
 
         $checkbox = $form->checkbox('checkbox');
         $this->assertTrue($checkbox instanceof \UMFlint\Html\Form\Input\Checkbox);
-
-        $checkboxes = $form->checkboxes('checkboxes');
-        $this->assertTrue($checkboxes instanceof \UMFlint\Html\Form\Input\Checkboxes);
 
         $color = $form->color('color');
         $this->assertTrue($color instanceof \UMFlint\Html\Form\Input\Color);
@@ -108,9 +103,6 @@ class FormTest extends \PHPUnit\Framework\TestCase
 
         $radio = $form->radio('radio');
         $this->assertTrue($radio instanceof \UMFlint\Html\Form\Input\Radio);
-
-        $radios = $form->radios('radios');
-        $this->assertTrue($radios instanceof \UMFlint\Html\Form\Input\Radios);
 
         $range = $form->range('range');
         $this->assertTrue($range instanceof \UMFlint\Html\Form\Input\Range);
@@ -151,26 +143,7 @@ class FormTest extends \PHPUnit\Framework\TestCase
         ]);
         $form->populate('');
         $text = $form->text('name');
-        $this->assertEquals('<div class="form-group"><label for="name" class="control-label col-sm-3 col-md-3 col-lg-3">Name</label><div class="col-xs-12 col-sm-9 col-md-9 col-lg-9"><input type="text" name="name" id="name" value="Bob Doe" class="form-control"></div></div>', $text->render());
-    }
-
-    public function testSetErrors()
-    {
-        $form = new Form($this->config);
-        $errors = [
-            'name'  => [
-                'This is an error. Beware!',
-            ],
-            'email' => [
-                'Wrong TLD.',
-            ],
-        ];
-        $form->setErrors($errors);
-        $text = $form->text('name');
-        $email = $form->email('email');
-
-        $this->assertEquals($text->getErrors(), $errors['name']);
-        $this->assertEquals($email->getErrors(), $errors['email']);
+        $this->assertEquals('<input type="text" name="name" id="name" value="Bob Doe" class="form-control">', $text->render());
     }
 
     public function testButton()
@@ -179,10 +152,12 @@ class FormTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('<button type="submit">Submit Your Form</button>', $form->button('Submit Your Form')->render());
     }
 
-    public function testActions()
+    public function testLabel()
     {
         $form = new Form($this->config);
-        $this->assertEquals('<div class="form-group"><div class="col-xs-12 col-sm-9 col-md-9 col-lg-9 col-sm-offset-3 col-md-offset-3 col-lg-offset-3">Enter your name: </div></div>', $form->actions('Enter your name: ')->render());
+        $label = $form->label('this-is-a-label');
+        $text = $label->getChildren()[0];
+        $this->assertEquals('this-is-a-label', $text);
     }
 
     public function testClose()
