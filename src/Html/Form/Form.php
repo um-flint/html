@@ -161,6 +161,22 @@ class Form extends Element
     }
 
     /**
+     * Get the value of an input given the name.
+     *
+     * @author Donald Wilcox <dowilcox@umflint.edu>
+     * @param $name
+     * @return mixed
+     */
+    protected function getValue($name)
+    {
+        if (!empty($this->old)) {
+            $this->values = array_merge($this->values, $this->old);
+        }
+
+        return array_get($this->values, $name, null);
+    }
+
+    /**
      * Set the validation rules.
      *
      * @author Donald Wilcox <dowilcox@umflint.edu>
@@ -231,7 +247,7 @@ class Form extends Element
             $value = null;
 
             // Set value if we have one from populate function.
-            $value = array_get($this->values, $name, null);
+            $value = $this->getValue($name);
 
             // Create input class.
             $input = new $class($name, $value);
